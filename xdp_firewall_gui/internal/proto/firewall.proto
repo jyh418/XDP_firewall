@@ -1,0 +1,33 @@
+syntax = "proto3";
+package proto;
+
+// 防火墙规则
+message FirewallRule {
+  string src_ip = 1;    // 源 IP
+  string dst_ip = 2;    // 目标 IP
+  string proto = 3;     // 协议（tcp/udp/icmp）
+  int32 src_port = 4;   // 源端口（0 表示任意）
+  int32 dst_port = 5;   // 目标端口（0 表示任意）
+  string action = 6;    // 动作（drop/pass）
+  int32 priority = 7;   // 优先级（1-10，数字越大优先级越高）
+}
+
+// 流量统计数据
+message TrafficStats {
+  string time = 1;      // 时间戳（如 "2024-05-20 10:00:00"）
+  string src_ip = 2;    // 源 IP
+  string dst_ip = 3;    // 目标 IP
+  int64 packet_count = 4;  // 包数
+  int64 byte_count = 5;    // 字节数
+}
+
+// 拦截日志
+message LogEntry {
+  string time = 1;      // 时间戳
+  string src_ip = 2;    // 源 IP
+  string dst_ip = 3;    // 目标 IP
+  string proto = 4;     // 协议
+  int32 src_port = 5;   // 源端口
+  int32 dst_port = 6;   // 目标端口
+  string reason = 7;    // 拦截原因（如 "匹配规则ID:1"）
+}
